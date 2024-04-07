@@ -1,0 +1,10 @@
+version: 0.0
+Resources:
+  - TargetService:
+      Type: AWS::ECS::Service
+      Properties:
+        TaskDefinition: arn:aws:ecs:ap-south-1:045239298051:task-definition/customer-svc-task-001:1
+        LoadBalancerInfo:
+          ContainerName: customer-svc
+          ContainerPort: 3000
+        PlatformVersion: LATEST

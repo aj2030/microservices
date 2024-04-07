@@ -1,0 +1,21 @@
+{
+  "name": "lambda",
+  "version": "1.0.0",
+  "description": "Lambda hosted microservices",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ajitabh Sharma",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.8",
+    "body-parser": "^1.20.2",
+    "config": "^3.3.11",
+    "express": "^4.18.3",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.9.2",
+    "redis": "^4.6.13",
+    "supertest": "^6.3.4"
+  }
+}
