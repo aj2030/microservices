@@ -9,7 +9,7 @@ const express = require('express');
 const mysql = require('mysql2');
 const axios = require('axios');
 const app = express();
-const config = require('./config/config');
+const config = require('./config');
 
 // Create a connection pool to the database
 /**
