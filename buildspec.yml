@@ -1,34 +1,15 @@
-# Write a sample buildspec.yaml file for CodeBuild. 
-# Author: Ajitabh Sharma
-# Date: 03-Apr-2024
 version: 0.2
 phases:
   pre_build:
     commands:
-      - echo Using account $AWS_ACCOUNT_ID
-      - echo Using region $AWS_DEFAULT_REGION
-      - echo Using repository $IMAGE_REPO_NAME
-      - echo Using tag $IMAGE_TAG
       - echo Using build artifact name as $BUILD_ARTIFACT_NAME
   build:
     commands:
-      - echo Current version of docker is
-      - docker --version
-      - echo Changing directory. Going to Dockerfile directory
-      - cd microservices/customer
-      - echo Currently in
-      - echo Building the Docker image...
-      - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .
+      - zip -rv $BUILD_ARTIFACT_NAME.zip .
   post_build:
     commands:
-      - echo Pushing the Docker image to Amazon ECR...
-      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
-      - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
-      - echo Writing image definitions file...
-      - printf '[{"name":"%s","imageUri":"%s"}]' $IMAGE_REPO_NAME $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG > $BUILD_ARTIFACT_NAME.json
-      - cat $BUILD_ARTIFACT_NAME.json
-#artifacts:
-  #base-directory: .
-  #files:
-   #- $BUILD_ARTIFACT_NAME.json
+      - echo Build completed on `date`
+artifacts:
+  base-directory: .
+  files:
+    - $BUILD_ARTIFACT_NAME.zip

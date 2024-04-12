@@ -35,7 +35,7 @@ app.get('/full/health/check', (req, res) => {
     pool.getConnection((err, connection) => {
         if (err) {
             console.error('Error acquiring database connection:', err);
-            res.status(500).json({ error: 'Health check failuer' });
+            res.status(500).json({ error: 'Health check failure.' });
             return;
         }
         else{
